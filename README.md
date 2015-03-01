@@ -6,6 +6,5 @@ This will eventually be the introduction to a book about the mathematical founda
 Here is some gratuitous $$\TeX$$, just for testing:
 $$e^{i\pi}+1 = 0$$
 
-Well, that looks nice.
 
 
