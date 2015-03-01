@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-   * Testing
 * [Functional Programming](fp.md)
    * [Equational Reasoning](fp-equational.md)
    * [Drawings](fp-drawing.md)
