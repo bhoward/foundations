@@ -25,22 +25,26 @@ The basic types of values are essentially the same as in Java, except by convent
 * **Strings** (`String`): `"Hello World"`, `"I said, \"Hello!\""`, `"line 1\nline 2"`
 
 One convenient extension in Scala is the ability to specify strings that contain special characters, such as quotes and newlines, by enclosing them in triple quotes:
-\begin{verbatim}
+
+```
 """This is a string with several lines.
 This is the second line, which contains a quotation: "Hello World".
 This is the third line."""
-\end{verbatim}
-Another, more recent, extension to the notation for strings is ``string interpolation.'' This is actually a very general and extensible facility in the language, but in its simplest form, if you prefix a string literal with the letter \verb|s|, then any occurrence of \verb|$|$x$ in the string will be replaced by the value of variable $x$ (converted to a string, if necessary). Instead of a single variable, an entire expression \textit{expr} will be interpolated if it is enclosed in braces: \verb|${|\textit{expr}\verb|}|. Here is an example:
-\begin{verbatim}
+```
+
+Another, more recent, extension to the notation for strings is "string interpolation." This is actually a very general and extensible facility in the language, but in its simplest form, if you prefix a string literal with the letter `s`, then any occurrence of `$x` in the string will be replaced by the value of variable `x` (converted to a string, if necessary). Instead of a single variable, an entire expression `expr` will be interpolated if it is enclosed in braces: `${expr}`. Here is an example:
+
+```
 s"The value of x is $x, and x*7 is ${x*7}."
-\end{verbatim}
-If $x$ is 6, then this produces the string \verb|"The value of x is 6, and x*7 is 42."|
+```
+
+If `x` is 6, then this produces the string `"The value of x is 6, and x*7 is 42."`
 
 The Scala standard library provides quite a few types of collections as well; here are examples of how to create instances of some of them:
-\begin{itemize}
-\item \textbf{Lists}: If $x_1$, $x_2$, $x_3$, \ldots\ are values of some type $T$, then \texttt{List($x_1$, $x_2$, $x_3$, \ldots)} has type \texttt{List[$T$]} (this is akin to the Java parameterized type \texttt{List<$T$>}). Another name for the empty list is \texttt{Nil}, and values may be added to the front of a list using the \texttt{::} operator, so \verb|1 :: 2 :: 3 :: Nil| is an equivalent way of constructing \texttt{List(1, 2, 3)}, of type \texttt{List[Int]}. The front element of a (non-empty) list $a$ may be retrieved using the \texttt{head} operation: \texttt{$a$.head}; the list of everything except the head is \texttt{$a$.tail}. For example, \texttt{List(1, 2, 3).head} is \texttt{1}, while \texttt{List(1, 2, 3).tail} is \texttt{List(2, 3)}.
 
-\item \textbf{Tuples}: If $x_1$, $x_2$, $x_3$, \ldots\ are values of types $T_1$, $T_2$, $T_3$, \ldots, respectively, then \texttt{($x_1$, $x_2$, $x_3$, \ldots)} has type \texttt{($T_1$, $T_2$, $T_3$, \ldots)}. A common special case of this is the \emph{pair}; for example, \texttt{(42, "Hello World")} is a pair of type \texttt{(Int, String)}. Another special case is the type \texttt{Unit}, which has the single value \texttt{()}---that is, it is a tuple with no elements. The first element of a (non-empty) tuple $a$ may be accessed as $a$\verb|._1|; the second element is $a$\verb|._2|, \textit{etc}. It is often better to extract elements of a tuple with pattern matching; see below.
+* **Lists**: If `x1`, `x2`, `x3`, ... are values of some type `T`, then `List(x1, x2, x3, ...)` has type `List[T]` (this is akin to the Java parameterized type `List<T>`). Another name for the empty list is `Nil`, and values may be added to the front of a list using the `::` operator, so `1 :: 2 :: 3 :: Nil` is an equivalent way of constructing `List(1, 2, 3)`, of type `List[Int]`. The front element of a (non-empty) list `a` may be retrieved using the `head` operation: `a.head`; the list of everything except the head is `a.tail`. For example, `List(1, 2, 3).head` is `1`, while `List(1, 2, 3).tail` is `List(2, 3)`.
+
+* **Tuples**: If $x_1$, $x_2$, $x_3$, \ldots\ are values of types $T_1$, $T_2$, $T_3$, \ldots, respectively, then \texttt{($x_1$, $x_2$, $x_3$, \ldots)} has type \texttt{($T_1$, $T_2$, $T_3$, \ldots)}. A common special case of this is the \emph{pair}; for example, \texttt{(42, "Hello World")} is a pair of type \texttt{(Int, String)}. Another special case is the type \texttt{Unit}, which has the single value \texttt{()}---that is, it is a tuple with no elements. The first element of a (non-empty) tuple $a$ may be accessed as $a$\verb|._1|; the second element is $a$\verb|._2|, \textit{etc}. It is often better to extract elements of a tuple with pattern matching; see below.
 
 \item \textbf{Arrays}:  If $x_1$, $x_2$, $x_3$, \ldots\ are values of some type $T$, then \texttt{Array($x_1$, $x_2$, $x_3$, \ldots)} has type \texttt{Array[$T$]} (this is akin to the Java type \texttt{$T$[]}). Just as in Java and C++, arrays are zero-indexed. Element $i$ of array $a$ is named by the expression \texttt{$a$($i$)}, so if \texttt{$a$.size} is $n$, then the elements of $a$ are \texttt{$a$(0)} through \texttt{$a$($n-1$)}. To create an array containing $n$ copies of some value $x$, use \texttt{Array.fill($n$)($x$)}.
 
