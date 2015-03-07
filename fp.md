@@ -56,31 +56,31 @@ The Scala standard library provides quite a few types of collections as well; he
 
 * **Options**: A common source of errors in Java is the convention of returning `null` to indicate that some object was unavailable (for example, given a Java map similar to the `age` example above, `age.get("Fred")` would return `null`). Scala attempts to avoid this by providing the "option" type: a value of type `Option[T]` is either `Some(x)`, where `x` is a value of type `T`, or it is the special value `None`. The advantage over returning `null` is that `None` is an actual object; attempting to call a method on it will not result in a null pointer exception. The option type is also a signal to the programmer to be prepared for the case of a non-existent object; in Java, it is too easy to ignore this possibility because *every* object type allows `null`. To retrieve the contained value from an option object, use the `get` method: `Some(x).get` yields `x`. Attempting to call `get` on `None` will throw an exception, so a useful variant is the `getOrElse` method: `a.getOrElse(y)` will return the contents of `a`, if any, or `y` if `a` was `None`. As with tuples (and lists), we will see below that it is often better style to use pattern matching on options.
 
-The expressions of Scala are carried over largely unchanged from Java and C++. For example, \verb|(0 <= x) && (x < 10)| is true when \texttt{x} is between 0 (inclusive) and 10 (exclusive). Common mathematical functions are available in the \texttt{math} object: \texttt{math.sqrt(x)}, \texttt{math.pow(x, n)}, and \texttt{math.max(x, y)} are examples, returning $\sqrt{x}$, $x^n$, and the maximum of \texttt{x} and \texttt{y}, respectively. The syntax for calling methods or accessing fields of an object is the same: \texttt{$a$.$m$($x$, \ldots)} calls method $m$ of $a$ with arguments $x$, \ldots, while \texttt{$a$.$f$} accesses the field of $a$ named $f$. Scala provides a few nice generalizations of this: if a method takes no parameters, you may omit the parentheses around the arguments (this removes the distinction between accessing a field and calling a no-parameter method---think of the difference in Java between the \texttt{.length()} method on strings and the \texttt{.length} field on arrays; in Scala, both of these quantities may be accessed as \texttt{.length}\footnote{As an added convenience, all of the collections except tuples define both \texttt{.length} and \texttt{.size}, so you don't have to remember which defines which.}); if a method takes exactly one parameter, then the dot and the parentheses may be omitted (for example, given a set $a$, the expression \texttt{$a$ contains $x$} is the same as \texttt{$a$.contains($x$)}; Scala allows methods to be used like operators in this fashion because in fact all of the operators, such as \texttt{+}, are really methods: \texttt{$a$ + $b$} is the same as \texttt{$a$.+($b$)}). One last fact to notice about Scala expressions is that even ``primitive'' values are objects with methods: \texttt{42.toString} yields \texttt{"42"}.
+The expressions of Scala are carried over largely unchanged from Java and C++. For example, `(0 <= x) && (x < 10)` is true when `x` is between 0 (inclusive) and 10 (exclusive). Common mathematical functions are available in the `math` object: `math.sqrt(x)`, `math.pow(x, n)`, and `math.max(x, y)` are examples, returning $$\sqrt{x}$$, $$x^n$$, and the maximum of `x` and `y`, respectively. The syntax for calling methods or accessing fields of an object is the same: `a.m(x, ...)` calls method `m` of `a` with arguments `x`, ..., while `a.f` accesses the field of `a` named `f`. Scala provides a few nice generalizations of this:
+* if a method takes no parameters, you may omit the parentheses around the arguments (this removes the distinction between accessing a field and calling a no-parameter method -- think of the difference in Java between the `.length()` method on strings and the `.length` field on arrays; in Scala, both of these quantities may be accessed as `.length`[^2]);
+* if a method takes exactly one parameter, then the dot and the parentheses may be omitted (for example, given a set `a`, the expression `a contains x` is the same as `a.contains(x)`; Scala allows methods to be used like operators in this fashion because in fact all of the operators, such as `+`, are really methods: `a + b` is the same as `a.+(b)`).
 
-\subsection*{Exercises}
-\begin{enumerate}
-\item Evaluate the following expressions and explain what operations are being performed:
-\begin{enumerate}
-\item \verb|List(3, 1, 4) ++ List(2, 3, 5)|
-\item \verb|Set(3, 1, 4) & Set(2, 3, 5)|
-\item \verb-Set(3, 1, 4) | Set(2, 3, 5)-
-\item \verb|Set(3, 1, 4) &~ Set(2, 3, 5)|
-\item \verb|Set(3, 1, 4).subsets.toSet|
-\end{enumerate}
+One last fact to notice about Scala expressions is that even "primitive" values are objects with methods: `42.toString` yields `"42"`.
 
-\item For each of the following expressions, predict what the result will be, then check your prediction by evaluating it in Scala:
-\begin{enumerate}
-\item \verb|Map(1 -> 1, 2 -> 4, 3 -> 9)(2)|
-\item \verb|Map(1 -> 1, 2 -> 4, 3 -> 9)(4)|
-\item \verb|Map(1 -> 1, 2 -> 4, 3 -> 9).get(4)|
-\item \verb|Map(1 -> 1, 2 -> 4, 3 -> 9) get 2|
-\item \verb|Map(1 -> 1, 2 -> 4, 3 -> 9).keySet|
-\end{enumerate}
+[^2]: As an added convenience, all of the collections except tuples define both `.length` and `.size`, so you don't have to remember which defines which.
 
-\end{enumerate}
+### Exercises
+1. Evaluate the following expressions and explain what operations are being performed:
+   1. `List(3, 1, 4) ++ List(2, 3, 5)`
+   2. `Set(3, 1, 4) & Set(2, 3, 5)`
+   3. `Set(3, 1, 4) | Set(2, 3, 5)`
+   4. `Set(3, 1, 4) &~ Set(2, 3, 5)`
+   5. `Set(3, 1, 4).subsets.toSet`
 
-\section{Control Structures}
+2. For each of the following expressions, predict what the result will be, then check your prediction by evaluating it in Scala:
+   1. `Map(1 -> 1, 2 -> 4, 3 -> 9)(2)`
+   2. `Map(1 -> 1, 2 -> 4, 3 -> 9)(4)`
+   3. `Map(1 -> 1, 2 -> 4, 3 -> 9).get(4)`
+   4. `Map(1 -> 1, 2 -> 4, 3 -> 9) get 2`
+   5. `Map(1 -> 1, 2 -> 4, 3 -> 9).keySet`
+
+## Control Structures
+
 As with expressions, the control structures such as \texttt{if} and \texttt{while} are substantially the same in Scala as in Java and C++. For example, the following code fragment works exactly the same in all three languages:
 \begin{verbatim}
 while (n != 1) {
