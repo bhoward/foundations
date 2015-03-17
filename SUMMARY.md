@@ -5,6 +5,7 @@
    * [Equational Reasoning](fp-equational.md)
    * [Drawings](fp-drawing.md)
    * [Lists](fp-list.md)
+   * [Streams](fp-stream.md)
 * [Properties of Programs](pp.md)
    * [Sorting Algorithms, Functionally](pp-sorting.md)
    * [Running Time and Recurrences](pp-recurrence.md)
